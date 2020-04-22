@@ -9,8 +9,8 @@ import (
 	"net/http"
 )
 
-func test123() {
-	fmt.Print("test")
+func TestA() string {
+	return "abc"
 }
 
 func GetA(url string, param Param) ApiData {
