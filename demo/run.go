@@ -1,6 +1,6 @@
 package main
 
-import "woodpecker/apiUtils"
+import "github.com/yanyundata/woodpecker/apiUtils"
 
 func main() {
 	apiUtils.test123()
