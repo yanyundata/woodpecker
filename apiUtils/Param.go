@@ -1,15 +1,15 @@
 package apiUtils
 
 type Param struct {
-	data map[string]string
+	Data map[string]string
 }
 
 func (p Param) applyA(url string) string {
-	if len(p.data) > 0 {
+	if len(p.Data) > 0 {
 		url = url + "?"
 
 		isFirst := true
-		for k, v := range p.data {
+		for k, v := range p.Data {
 			if isFirst {
 				url = url + k + "=" + v
 				isFirst = false
