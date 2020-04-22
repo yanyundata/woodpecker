@@ -3,19 +3,17 @@ package apiUtils
 import (
 	"encoding/json"
 	"fmt"
-	"go/types"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-func test123() types.Nil {
+func test123() {
 	fmt.Print("test")
 }
 
 func GetA(url string, param Param) ApiData {
-
 	url = param.applyA(url)
 	fmt.Print("GetA:" + url + "\n")
 
