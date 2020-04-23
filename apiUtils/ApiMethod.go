@@ -14,3 +14,13 @@ func GetA(url string, param Param) ApiData {
 
 	return ApiData{res.Body}
 }
+
+func GetB(url string, param Param) ApiData {
+	url = param.applyB(url)
+	fmt.Print("GetB:" + url + "\n")
+
+	req, _ := http.NewRequest("GET", url, nil)
+	res, _ := http.DefaultClient.Do(req)
+
+	return ApiData{res.Body}
+}

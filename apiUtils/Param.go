@@ -21,3 +21,13 @@ func (p Param) applyA(url string) string {
 
 	return url
 }
+
+func (p Param) applyB(url string) string {
+	if len(p.Data) > 0 {
+		for _, v := range p.Data {
+			url = url + "/" + v
+		}
+	}
+
+	return url
+}
