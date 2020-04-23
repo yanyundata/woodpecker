@@ -28,8 +28,6 @@ func (ap ApiData) ToJson() JsonObject {
 	if err1 != nil {
 		log.Println(err1)
 	}
-	data := jsonMap["data"].(interface{})
-	log.Print(data)
 
 	jsonObject := JsonObject{jsonMap}
 
