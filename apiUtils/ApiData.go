@@ -19,7 +19,7 @@ func (ap ApiData) ToString() string {
 	return string(bs)
 }
 
-func (ap ApiData) ToJson() map[string]interface{} {
+func (ap ApiData) ToJson() JsonObject {
 	defer ap.body.Close()
 
 	jsonMap := make(map[string]interface{})
@@ -28,6 +28,10 @@ func (ap ApiData) ToJson() map[string]interface{} {
 	if err1 != nil {
 		log.Println(err1)
 	}
+	data := jsonMap["data"].(interface{})
+	log.Print(data)
 
-	return jsonMap
+	jsonObject := JsonObject{jsonMap}
+
+	return jsonObject
 }
