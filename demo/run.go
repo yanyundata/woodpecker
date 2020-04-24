@@ -3,13 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/yanyundata/woodpecker/apiUtils"
+	"github.com/yanyundata/woodpecker/demo/dto"
 	"log"
 )
-
-type DemoDto struct {
-	Test1 string `json:"test1"`
-	Test2 string `json:"test2"`
-}
 
 func main() {
 	//a=1;b=c;test1=100;test2=2344
@@ -25,7 +21,7 @@ func main() {
 		fmt.Print(e.Value.(apiUtils.JsonObject).Find("test1").ToString())
 	}
 
-	PostC1Data := apiUtils.PostC1("/admin/test/saveC1", &DemoDto{"aaaa", "bbb"}).ToJson()
+	PostC1Data := apiUtils.PostC1("/admin/test/saveC1", &dto.DemoDto{Test1: "aaaa", Test2: "bbb"}).ToJson()
 	c1v := PostC1Data.Find("data.test1").ToString()
 	fmt.Print(c1v)
 }

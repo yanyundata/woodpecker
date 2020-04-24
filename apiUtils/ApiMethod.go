@@ -32,7 +32,6 @@ func GetB(url string, param PathParam) ApiData {
 func PostC1(url string, object interface{}) ApiData {
 	fmt.Print("GetB:" + url + "\n")
 	j, _ := json.Marshal(object)
-	fmt.Print(string(j))
 
 	req, _ := http.NewRequest("POST", BaseUrl+url, bytes.NewBuffer(j))
 	req.Header.Add("content-type", "application/json")
