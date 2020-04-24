@@ -11,3 +11,7 @@ func (d DataAdapter) ToString() string {
 func (d DataAdapter) ToFloat() float64 {
 	return d.data.(float64)
 }
+
+func (d DataAdapter) ToList() []interface{} {
+	return d.data.([]interface{})
+}
