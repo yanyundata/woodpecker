@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/yanyundata/woodpecker/apiUtils"
 	"log"
 )
@@ -12,14 +13,9 @@ func main() {
 	}
 
 	getBData := apiUtils.GetB("https://yan-yun.com:38085/lvyuan/admin/test", apiUtils.Param{Data: map[string]string{"test1": "100", "test2": "2"}}).ToJson()
-	list := getBData.Find("data").ToList()
-	for _, object := range list {
-		value := object.(map[string]interface{})
-
-		var test1 = value["test1"].(string)
-		if "100" == test1 {
-			log.Print("GetB OK!!!\n")
-		}
+	list := getBData.Find("data").ToJsonObjectList()
+	for e := list.Front(); e != nil; e = e.Next() {
+		fmt.Print(e.Value.(apiUtils.JsonObject).Find("test1").ToString())
 	}
 
 }

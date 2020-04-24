@@ -5,7 +5,7 @@ import (
 )
 
 type JsonObject struct {
-	jsonMap map[string]interface{}
+	JsonMap map[string]interface{}
 }
 
 func (ap JsonObject) Find(path string) DataAdapter {
@@ -16,7 +16,7 @@ func (ap JsonObject) Find(path string) DataAdapter {
 	for i := 0; i < len(paths); i++ {
 		var index = paths[i]
 		if i == 0 {
-			tempData = ap.jsonMap
+			tempData = ap.JsonMap
 		}
 
 		if len(paths) == i+1 {
