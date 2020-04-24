@@ -11,7 +11,7 @@ func main() {
 
 	gadata := apiUtils.GetA("/admin/test", make(apiUtils.PathParam).Set("test", "123")).ToString()
 	if gadata == "123ok" {
-		log.Print("GetA OK!!!\n")
+		log.Print("Ge tA OK!!!\n")
 	}
 
 	gbdata := apiUtils.GetB("/admin/test", make(apiUtils.PathParam).Set("test1", "100").Set("test2", "200")).ToJson()
