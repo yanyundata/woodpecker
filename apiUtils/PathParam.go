@@ -17,7 +17,7 @@ func (pp PathParam) applyA(url string) string {
 				url = url + k + "=" + v
 				isFirst = false
 			} else {
-				url = "&" + url + k + "=" + v
+				url = url + "&" + k + "=" + v
 			}
 		}
 	}

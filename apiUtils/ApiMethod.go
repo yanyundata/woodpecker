@@ -29,7 +29,7 @@ func GetB(url string, param PathParam) ApiData {
 	return ApiData{res.Body}
 }
 
-func PostC1(url string, object interface{}) ApiData {
+func PostC(url string, object interface{}) ApiData {
 	fmt.Print("GetB:" + url + "\n")
 	j, _ := json.Marshal(object)
 
@@ -41,11 +41,11 @@ func PostC1(url string, object interface{}) ApiData {
 	return ApiData{res.Body}
 }
 
-func PostC2(url string, param Param) ApiData {
-	url = param.applyB(url)
-	fmt.Print("GetB:" + url + "\n")
+func PostA(url string, param PathParam) ApiData {
+	url = param.applyA(url)
+	fmt.Print("PostA:" + BaseUrl + url + "\n")
 
-	req, _ := http.NewRequest("GET", BaseUrl+url, nil)
+	req, _ := http.NewRequest("POST", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
 
 	return ApiData{res.Body}

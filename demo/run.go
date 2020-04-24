@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/yanyundata/woodpecker/apiUtils"
 	"github.com/yanyundata/woodpecker/demo/dto"
 	"log"
@@ -10,18 +9,24 @@ import (
 func main() {
 	//a=1;b=c;test1=100;test2=2344
 
-	getAData := apiUtils.GetA("/admin/test", make(apiUtils.PathParam).Set("test", "123")).ToString()
-	if getAData == "123ok" {
+	gadata := apiUtils.GetA("/admin/test", make(apiUtils.PathParam).Set("test", "123")).ToString()
+	if gadata == "123ok" {
 		log.Print("GetA OK!!!\n")
 	}
 
-	getBData := apiUtils.GetB("/admin/test", make(apiUtils.PathParam).Set("test1", "100").Set("test2", "200")).ToJson()
-	list := getBData.Find("data").ToJsonObjectList()
+	gbdata := apiUtils.GetB("/admin/test", make(apiUtils.PathParam).Set("test1", "100").Set("test2", "200")).ToJson()
+	list := gbdata.Find("data").ToJsonObjectList()
 	for e := list.Front(); e != nil; e = e.Next() {
-		fmt.Print(e.Value.(apiUtils.JsonObject).Find("test1").ToString())
+		log.Print("GetB OK!!!\n")
 	}
 
-	PostC1Data := apiUtils.PostC1("/admin/test/saveC1", &dto.DemoDto{Test1: "aaaa", Test2: "bbb"}).ToJson()
-	c1v := PostC1Data.Find("data.test1").ToString()
-	fmt.Print(c1v)
+	padata := apiUtils.PostA("/admin/test/saveC2", make(apiUtils.PathParam).Set("test1", "aaaa").Set("test2", "bbbb")).ToJson()
+	if padata.Find("data.test2").ToString() == "bbbb" {
+		log.Print("PostA OK!!!\n")
+	}
+
+	pcdata := apiUtils.PostC("/admin/test/saveC1", &dto.DemoDto{Test1: "aaaa", Test2: "bbb"}).ToJson()
+	if pcdata.Find("data.test1").ToString() == "aaaa" {
+		log.Print("PostC OK!!!\n")
+	}
 }
