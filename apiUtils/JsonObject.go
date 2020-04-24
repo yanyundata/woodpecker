@@ -20,7 +20,7 @@ func (ap JsonObject) Find(path string) DataAdapter {
 		}
 
 		if len(paths) == i+1 {
-			findData = tempData[index].(interface{})
+			findData = tempData[index]
 		} else {
 			tempData = tempData[index].(map[string]interface{})
 		}
