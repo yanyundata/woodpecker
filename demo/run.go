@@ -11,7 +11,7 @@ func main() {
 
 	gadata := apiUtils.GetA("/admin/test", "?test=123").ToString()
 	if gadata == "123ok" {
-		log.Print("Ge tA OK!!!\n")
+		log.Print("GetA OK!!!\n")
 	}
 
 	gbdata := apiUtils.GetB("/admin/test", "/100/200").ToJson()
@@ -40,7 +40,7 @@ func main() {
 		log.Print("PutC OK!!!\n")
 	}
 
-	dbdata := apiUtils.DeleteB("/admin/delete", "/100").ToJson()
+	dbdata := apiUtils.DeleteB("/admin/test/delete", "/100").ToJson()
 	if dbdata.Find("msg").ToString() == "操作成功" {
 		log.Print("DeleteB OK!!!\n")
 	}

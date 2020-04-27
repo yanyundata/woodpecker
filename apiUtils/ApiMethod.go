@@ -100,6 +100,7 @@ func DeleteA(url string, param string) ApiData {
 //delete 请求，请求路径参数
 //delete https://ip:port/test/delete/{id}
 func DeleteB(url string, param string) ApiData {
+	url = url + param
 	fmt.Println("DeleteB:" + BaseUrl + url)
 	req, _ := http.NewRequest("DELETE", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
