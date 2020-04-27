@@ -9,8 +9,8 @@ import (
 
 var BaseUrl = "https://yan-yun.com:38085/lvyuan"
 
-func GetA(url string, param PathParam) ApiData {
-	url = param.applyA(url)
+func GetA(url string, param string) ApiData {
+	url = url + param
 	fmt.Print("GetA:" + BaseUrl + url + "\n")
 
 	req, _ := http.NewRequest("GET", BaseUrl+url, nil)
@@ -19,8 +19,8 @@ func GetA(url string, param PathParam) ApiData {
 	return ApiData{res.Body}
 }
 
-func GetB(url string, param PathParam) ApiData {
-	url = param.applyB(url)
+func GetB(url string, param string) ApiData {
+	url = url + param
 	fmt.Print("GetB:" + BaseUrl + url + "\n")
 
 	req, _ := http.NewRequest("GET", BaseUrl+url, nil)
@@ -41,8 +41,8 @@ func PostC(url string, object interface{}) ApiData {
 	return ApiData{res.Body}
 }
 
-func PostA(url string, param PathParam) ApiData {
-	url = param.applyA(url)
+func PostA(url string, param string) ApiData {
+	url = url + param
 	fmt.Print("PostA:" + BaseUrl + url + "\n")
 
 	req, _ := http.NewRequest("POST", BaseUrl+url, nil)
