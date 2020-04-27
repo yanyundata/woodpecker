@@ -5,10 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
-//var BaseUrl = "https://yan-yun.com:38085/lvyuan"
-var BaseUrl = "http://localhost:9000"
+var BaseUrl = ""
+
+func init() {
+	BaseUrl = os.Getenv("BaseUrl")
+}
 
 func GetA(url string, param string) ApiData {
 	url = url + param
