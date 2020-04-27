@@ -29,4 +29,20 @@ func main() {
 	if pcdata.Find("data.test1").ToString() == "aaaa" {
 		log.Print("PostC OK!!!\n")
 	}
+
+	putadata := apiUtils.PutA("/admin/test/update1", "?test1=aaaa&test2=bbbb").ToJson()
+	if putadata.Find("data.test2").ToString() == "bbbb" {
+		log.Print("PutA OK!!!\n")
+	}
+
+	putcdata := apiUtils.PutC("/admin/test/update2", &dto.DemoDto{Test1: "aaaa", Test2: "bbb"}).ToJson()
+	if putcdata.Find("data.test1").ToString() == "aaaa" {
+		log.Print("PutC OK!!!\n")
+	}
+
+	dbdata := apiUtils.DeleteB("/admin/delete", "/100").ToJson()
+	if dbdata.Find("msg").ToString() == "操作成功" {
+		log.Print("DeleteB OK!!!\n")
+	}
+
 }
