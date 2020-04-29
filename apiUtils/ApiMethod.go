@@ -3,7 +3,7 @@ package apiUtils
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"log"
 	"net/http"
 	"os"
 )
@@ -16,7 +16,7 @@ func init() {
 
 func GetA(url string, param string) ApiData {
 	url = url + param
-	fmt.Print("GetA:" + BaseUrl + url + "\n")
+	log.Println("GetA:" + BaseUrl + url)
 
 	req, _ := http.NewRequest("GET", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
@@ -26,7 +26,7 @@ func GetA(url string, param string) ApiData {
 
 func GetB(url string, param string) ApiData {
 	url = url + param
-	fmt.Print("GetB:" + BaseUrl + url + "\n")
+	log.Println("GetB:" + BaseUrl + url + "\n")
 
 	req, _ := http.NewRequest("GET", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
@@ -35,7 +35,7 @@ func GetB(url string, param string) ApiData {
 }
 
 func PostC(url string, object interface{}) ApiData {
-	fmt.Print("GetB:" + url + "\n")
+	log.Println("GetB:" + url + "\n")
 	j, _ := json.Marshal(object)
 
 	req, _ := http.NewRequest("POST", BaseUrl+url, bytes.NewBuffer(j))
@@ -48,7 +48,7 @@ func PostC(url string, object interface{}) ApiData {
 
 func PostA(url string, param string) ApiData {
 	url = url + param
-	fmt.Print("PostA:" + BaseUrl + url + "\n")
+	log.Println("PostA:" + BaseUrl + url + "\n")
 
 	req, _ := http.NewRequest("POST", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
@@ -60,7 +60,7 @@ func PostA(url string, param string) ApiData {
 // put: https://ip:port/test/put/{one}/{two}
 func PutA(url string, param string) ApiData {
 	url = url + param
-	fmt.Printf("PutA:" + BaseUrl + url + "\n")
+	log.Println("PutA:" + BaseUrl + url + "\n")
 	req, _ := http.NewRequest("PUT", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	return ApiData{res.Body}
@@ -70,7 +70,7 @@ func PutA(url string, param string) ApiData {
 //put: https://ip:port/test/put/two?param1=xxx&param2=xxxx
 func PutB(url string, param string) ApiData {
 	url = url + param
-	fmt.Println("PutB:" + BaseUrl + url)
+	log.Println("PutB:" + BaseUrl + url)
 	req, _ := http.NewRequest("PUT", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	return ApiData{res.Body}
@@ -79,7 +79,7 @@ func PutB(url string, param string) ApiData {
 //put 请求 请求体参数
 //put : https://ip:port/test/put/three
 func PutC(url string, object interface{}) ApiData {
-	fmt.Print("PutC:" + url + "\n")
+	log.Println("PutC:" + url + "\n")
 	j, _ := json.Marshal(object)
 
 	req, _ := http.NewRequest("PUT", BaseUrl+url, bytes.NewBuffer(j))
@@ -91,7 +91,7 @@ func PutC(url string, object interface{}) ApiData {
 //delete 请求 请求路径参数
 // delete https://ip:port/test/delete?id=xxx
 func DeleteA(url string, param string) ApiData {
-	fmt.Println("DeleteA:" + BaseUrl + url)
+	log.Println("DeleteA:" + BaseUrl + url)
 	req, _ := http.NewRequest("DELETE", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	return ApiData{res.Body}
@@ -101,7 +101,7 @@ func DeleteA(url string, param string) ApiData {
 //delete https://ip:port/test/delete/{id}
 func DeleteB(url string, param string) ApiData {
 	url = url + param
-	fmt.Println("DeleteB:" + BaseUrl + url)
+	log.Println("DeleteB:" + BaseUrl + url)
 	req, _ := http.NewRequest("DELETE", BaseUrl+url, nil)
 	res, _ := http.DefaultClient.Do(req)
 	return ApiData{res.Body}
