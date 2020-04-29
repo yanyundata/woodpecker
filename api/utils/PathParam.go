@@ -1,4 +1,4 @@
-package apiUtils
+package utils
 
 type PathParam map[string]string
 

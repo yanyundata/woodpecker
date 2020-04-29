@@ -1,0 +1,5 @@
+package TestCase
+
+func ITestCase() {
+
+}
