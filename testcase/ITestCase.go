@@ -1,4 +1,4 @@
-package TestCase
+package testcase
 
 func ITestCase() {
 

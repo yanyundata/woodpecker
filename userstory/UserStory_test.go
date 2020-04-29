@@ -1,9 +1,6 @@
-package UserStory
+package userstory
 
 import "testing"
-
-type U1 struct {
-}
 
 func TestUserStory(t *testing.T) {
 
