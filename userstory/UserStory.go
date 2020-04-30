@@ -1,23 +1,25 @@
 package userstory
 
-import "container/list"
-
 type UserStory struct {
-	testCaseList *list.List
+	testCaseMap map[string]ITestCase
 }
 
 func New() UserStory {
-	return UserStory{list.New()}
+	return UserStory{make(map[string]ITestCase)}
 }
 
 func (us UserStory) Tell(name string, testCase ITestCase) UserStory {
-	us.testCaseList.PushBack(testCase)
+	us.testCaseMap[name] = testCase
 	return us
 }
 
 func (us UserStory) ThatSAll() {
-	for tc := us.testCaseList.Front(); tc != nil; tc = tc.Next() {
-		tc.Value.(ITestCase).Test()
-	}
+	for name := range us.testCaseMap {
+		if us.testCaseMap[name].Test() {
+			println(name + " 测试通过")
+		} else {
+			println(name + " 测试失败")
+		}
 
+	}
 }
