@@ -7,7 +7,7 @@ import (
 )
 
 func TestUserStory(t *testing.T) {
-	us := userstory.New()
+	us := userstory.New("UserStory Demo1")
 	us.Tell("测试GetA接口", func(session userstory.Session) bool {
 		gadata := apiap.GetA("/admin/test", "?test=123").ToString()
 		if gadata == "123ok" {
@@ -22,5 +22,9 @@ func TestUserStory(t *testing.T) {
 		} else {
 			return false
 		}
+	}).Tell("假装FAIL", func(session userstory.Session) bool {
+		return false
+	}).Tell("空用例", func(session userstory.Session) bool {
+		return true
 	}).ThatSAll()
 }
