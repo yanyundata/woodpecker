@@ -8,11 +8,11 @@ import (
 
 func TestUserStory(t *testing.T) {
 	us := userstory.New()
-	us.Tell("用例1", userstory.TestCase(func(session userstory.Session) bool {
+	us.Tell("用例1", func(session userstory.Session) bool {
 		session["abc"] = "123"
 		return true
-	})).Tell("用例2", userstory.TestCase(func(session userstory.Session) bool {
+	}).Tell("用例2", func(session userstory.Session) bool {
 		println(utils.DataAdapter{Data: session["abc"]}.ToString())
 		return true
-	})).ThatSAll()
+	}).ThatSAll()
 }

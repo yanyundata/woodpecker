@@ -9,8 +9,8 @@ func New() UserStory {
 	return UserStory{make(map[string]ITestCase), make(Session)}
 }
 
-func (us UserStory) Tell(name string, testCase ITestCase) UserStory {
-	us.testCaseMap[name] = testCase
+func (us UserStory) Tell(name string, testCaseFun func(session Session) bool) UserStory {
+	us.testCaseMap[name] = TestCase(testCaseFun)
 	return us
 }
 
