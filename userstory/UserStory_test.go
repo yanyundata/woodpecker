@@ -1,8 +1,18 @@
 package userstory
 
-import "testing"
+import (
+	"log"
+	"testing"
+)
+
+type case1 struct {
+}
+
+func (c case1) Test() {
+	log.Println("YES")
+}
 
 func TestUserStory(t *testing.T) {
-
-	t.Log("test")
+	us := New()
+	us.Tell("用例1", &case1{}).ThatsAll()
 }

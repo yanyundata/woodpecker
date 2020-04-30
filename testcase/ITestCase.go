@@ -1,5 +1,0 @@
-package testcase
-
-func ITestCase() {
-
-}
