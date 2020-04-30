@@ -22,9 +22,9 @@ func (us UserStory) ThatSAll() {
 	for e := us.testCaseIndex.Front(); e != nil; e = e.Next() {
 		name := e.Value.(string)
 		if us.testCaseMap[name].Test(us.session) {
-			println(name + " 测试通过")
+			println("用例【" + name + "】" + " PASS")
 		} else {
-			println(name + " 测试失败")
+			println("用例【" + name + "】" + " FAIL")
 		}
 	}
 }
