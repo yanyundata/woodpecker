@@ -1,18 +1,15 @@
 package userstory
 
 import (
-	"log"
+	"fmt"
 	"testing"
 )
 
-type Case1 struct {
-}
-
-func (c Case1) Test() {
-	log.Println("YES")
-}
-
 func TestUserStory(t *testing.T) {
 	us := New()
-	us.Tell("用例1", Case1{}).ThatsAll()
+	us.Tell("用例1", TestCase(func() {
+		fmt.Println("YES")
+	})).Tell("用例2", TestCase(func() {
+		fmt.Println("YES,YES")
+	})).ThatSAll()
 }

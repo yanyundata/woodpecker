@@ -15,7 +15,7 @@ func (us UserStory) Tell(name string, testCase ITestCase) UserStory {
 	return us
 }
 
-func (us UserStory) ThatsAll() {
+func (us UserStory) ThatSAll() {
 	for tc := us.testCaseList.Front(); tc != nil; tc = tc.Next() {
 		tc.Value.(ITestCase).Test()
 	}
