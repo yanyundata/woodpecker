@@ -30,7 +30,6 @@ func c(method string, url string, object interface{}) Result {
 
 	req, _ := http.NewRequest(method, BaseUrl+url, bytes.NewBuffer(j))
 	req.Header.Add("content-type", "application/json")
-
 	res, _ := http.DefaultClient.Do(req)
 
 	return Result{res.Body}

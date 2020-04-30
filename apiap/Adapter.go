@@ -1,8 +1,9 @@
 package apiap
 
-func call(model Model) Result {
-	switch model.Method {
+func Call(model Model) Result {
+	switch model.TYPE {
 	case "A":
+		return aB(model.Method, model.Url, model.UrlParam)
 	case "B":
 		return aB(model.Method, model.Url, model.UrlParam)
 	case "C":
