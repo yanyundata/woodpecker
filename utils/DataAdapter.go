@@ -6,7 +6,7 @@ import (
 )
 
 type DataAdapter struct {
-	data interface{}
+	Data interface{}
 }
 
 func (d DataAdapter) ToString() string {
@@ -17,7 +17,7 @@ func (d DataAdapter) ToString() string {
 		}
 	}()
 
-	returnData = d.data.(string)
+	returnData = d.Data.(string)
 	return returnData
 }
 
@@ -28,8 +28,16 @@ func (d DataAdapter) ToFloat() float64 {
 
 	var returnData = math.MaxFloat64
 
-	returnData = d.data.(float64)
+	returnData = d.Data.(float64)
 	return returnData
+}
+
+func (d DataAdapter) ToInt() int64 {
+	defer func() {
+		recover()
+	}()
+
+	return d.Data.(int64)
 }
 
 func (d DataAdapter) ToInterfaceList() []interface{} {
@@ -37,7 +45,7 @@ func (d DataAdapter) ToInterfaceList() []interface{} {
 		recover()
 	}()
 
-	return d.data.([]interface{})
+	return d.Data.([]interface{})
 }
 
 func (d DataAdapter) ToJsonObjectList() *list.List {

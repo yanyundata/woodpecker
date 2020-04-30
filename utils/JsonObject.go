@@ -27,6 +27,6 @@ func (ap JsonObject) Find(path string) DataAdapter {
 
 	}
 
-	da := DataAdapter{data: findData}
+	da := DataAdapter{Data: findData}
 	return da
 }
