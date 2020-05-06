@@ -15,10 +15,10 @@ func init() {
 }
 
 func aB(method string, url string, param string) Result {
-	log.Println(method + ":" + BaseUrl + url)
-	url = url + param
+	url = BaseUrl + url + param
+	log.Println(method + ":" + url)
 
-	req, _ := http.NewRequest(method, BaseUrl+url, nil)
+	req, _ := http.NewRequest(method, url, nil)
 	res, _ := http.DefaultClient.Do(req)
 
 	return Result{res.Body}
