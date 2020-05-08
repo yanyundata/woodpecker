@@ -2,6 +2,7 @@ package utils
 
 import (
 	"container/list"
+	"log"
 	"math"
 )
 
@@ -13,6 +14,7 @@ func (d DataAdapter) ToString() string {
 	var returnData = ""
 	defer func() {
 		if err := recover(); err != nil {
+			log.Println(err)
 			returnData = "ToString Error"
 		}
 	}()
