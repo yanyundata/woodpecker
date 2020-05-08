@@ -34,7 +34,7 @@ func (us UserStory) ThatSAll() {
 		name := e.Value.(string)
 		sb := SandBox{testCaseName: name, session: us.session}
 		if noFail {
-			sb.Run(us.testCaseMap[name])
+			sb.run(us.testCaseMap[name])
 			lpStr := strconv.FormatInt(sb.timeCost, 10)
 			sunLp = sunLp + sb.timeCost
 

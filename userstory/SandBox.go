@@ -14,7 +14,7 @@ type SandBox struct {
 	msg      string
 }
 
-func (sb *SandBox) Run(testCase ITestCase) {
+func (sb *SandBox) run(testCase ITestCase) {
 	startTime := time.Now().Unix()
 	defer func() {
 		sb.timeCost = time.Now().Unix() - startTime
