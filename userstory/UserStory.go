@@ -4,7 +4,6 @@ import (
 	"container/list"
 	"log"
 	"strconv"
-	"time"
 )
 
 type UserStory struct {
@@ -18,10 +17,14 @@ func New(topic string) UserStory {
 	return UserStory{topic, make(map[string]ITestCase), list.New(), make(Session)}
 }
 
-func (us UserStory) Tell(name string, testCaseFun func(session Session) bool) UserStory {
+func (us UserStory) Tell(name string, testCaseFun func(session Session)) UserStory {
 	us.testCaseMap[name] = TestCase(testCaseFun)
 	us.testCaseIndex.PushBack(name)
 	return us
+}
+
+func (us UserStory) Error(errMsg string) {
+	panic(errMsg)
 }
 
 func (us UserStory) ThatSAll() {
@@ -29,19 +32,16 @@ func (us UserStory) ThatSAll() {
 	var sunLp = int64(0)
 	for e := us.testCaseIndex.Front(); e != nil; e = e.Next() {
 		name := e.Value.(string)
+		sb := SandBox{testCaseName: name, session: us.session}
 		if noFail {
-			startTime := time.Now().Unix()
-			var isPass = us.testCaseMap[name].Test(us.session)
-			endTime := time.Now().Unix()
+			sb.run(us.testCaseMap[name])
+			lpStr := strconv.FormatInt(sb.timeCost, 10)
+			sunLp = sunLp + sb.timeCost
 
-			lp := endTime - startTime
-			lpStr := strconv.FormatInt(lp, 10)
-			sunLp = sunLp + lp
-
-			if isPass {
+			if sb.pass {
 				log.Println("用例【" + name + "】" + " PASS " + lpStr + "ms")
 			} else {
-				log.Println("用例【" + name + "】" + " FAIL " + lpStr + "ms")
+				log.Println("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
 				noFail = false
 			}
 		} else {

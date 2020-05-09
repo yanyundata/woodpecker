@@ -1,11 +1,11 @@
 package userstory
 
 type ITestCase interface {
-	Test(session Session) bool
+	Test(session Session)
 }
 
-type TestCase func(session Session) bool
+type TestCase func(session Session)
 
-func (ts TestCase) Test(session Session) bool {
-	return ts(session)
+func (ts TestCase) Test(session Session) {
+	ts(session)
 }
