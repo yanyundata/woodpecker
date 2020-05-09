@@ -36,7 +36,6 @@ func (d DataAdapter) ToInt() int64 {
 	defer func() {
 		recover()
 	}()
-
 	return d.Data.(int64)
 }
 
