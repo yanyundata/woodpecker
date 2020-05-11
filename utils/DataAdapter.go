@@ -64,3 +64,7 @@ func (d DataAdapter) ToJsonObjectList() *list.List {
 
 	return JsonObjectList
 }
+
+func (d DataAdapter) IsNil() bool {
+	return d.Data == nil
+}
