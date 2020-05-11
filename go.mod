@@ -1,3 +1,3 @@
-module github.com/yanyundata/woodpecker
+module github.com/yanyundata/woodpecker/v1
 
 go 1.14
