@@ -28,11 +28,10 @@ func TestUserStory(t *testing.T) {
 
 func TestUserStoryCase(t *testing.T) {
 	us := userstory.New("用户查询测试")
-	us.Tell("测试具体查询", func(session userstory.Session) bool {
+	us.Tell("测试具体查询", func(session userstory.Session) {
 		gadata := apiap.GetA("https://yan-yun.com:38085/gotest/get/two/san/12", "").ToJson()
 		log.Println("====================")
 		log.Println(gadata)
 		log.Println("====================")
-		return true
 	}).ThatSAll()
 }

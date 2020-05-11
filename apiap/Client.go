@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
+	"strings"
 )
 
 var BaseUrl = ""
@@ -14,11 +16,16 @@ func init() {
 	BaseUrl = os.Getenv("BaseUrl")
 }
 
-func aB(method string, url string, param string) Result {
-	log.Println(method + ":" + BaseUrl + url)
-	url = url + param
-
-	req, _ := http.NewRequest(method, BaseUrl+url, nil)
+func aB(method string, uri string, param string) Result {
+	log.Println(method + ":" + BaseUrl + uri)
+	prefix := ""
+	if strings.Contains(param, "?") {
+		prefix = "?"
+		param = param[1:]
+	}
+	escape := url.PathEscape(param)
+	uri = uri + prefix + escape
+	req, _ := http.NewRequest(method, BaseUrl+uri, nil)
 	res, _ := http.DefaultClient.Do(req)
 
 	return Result{res.Body}
