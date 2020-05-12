@@ -2,7 +2,6 @@ package utils
 
 import (
 	"container/list"
-	"log"
 	"math"
 )
 
@@ -11,23 +10,10 @@ type DataAdapter struct {
 }
 
 func (d DataAdapter) ToString() string {
-	var returnData = ""
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println(err)
-			returnData = "ToString Error"
-		}
-	}()
-
-	returnData = d.Data.(string)
-	return returnData
+	return d.Data.(string)
 }
 
 func (d DataAdapter) ToFloat() float64 {
-	defer func() {
-		recover()
-	}()
-
 	var returnData = math.MaxFloat64
 
 	returnData = d.Data.(float64)
@@ -35,25 +21,14 @@ func (d DataAdapter) ToFloat() float64 {
 }
 
 func (d DataAdapter) ToInt() int64 {
-	defer func() {
-		recover()
-	}()
 	return d.Data.(int64)
 }
 
 func (d DataAdapter) ToInterfaceList() []interface{} {
-	defer func() {
-		recover()
-	}()
-
 	return d.Data.([]interface{})
 }
 
 func (d DataAdapter) ToJsonObjectList() *list.List {
-	defer func() {
-		recover()
-	}()
-
 	interfaceList := d.ToInterfaceList()
 	JsonObjectList := list.New()
 

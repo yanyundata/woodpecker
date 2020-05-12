@@ -1,7 +1,7 @@
 package userstory
 
 import (
-	"github.com/yanyundata/woodpecker/utils"
+	"log"
 	"time"
 )
 
@@ -19,7 +19,13 @@ func (sb *SandBox) run(testCase ITestCase) {
 	defer func() {
 		sb.timeCost = time.Now().Unix() - startTime
 		if err := recover(); err != nil {
-			sb.msg = utils.DataAdapter{Data: err}.ToString()
+			switch err.(type) {
+			case string:
+				sb.msg = err.(string)
+			default:
+				log.Println(err)
+			}
+
 			sb.pass = false
 		} else {
 			sb.pass = true

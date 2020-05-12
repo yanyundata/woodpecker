@@ -2,7 +2,8 @@ package userstory
 
 import (
 	"container/list"
-	"log"
+	"fmt"
+	"github.com/fatih/color"
 	"strconv"
 )
 
@@ -39,20 +40,22 @@ func (us UserStory) ThatSAll() {
 			sunLp = sunLp + sb.timeCost
 
 			if sb.pass {
-				log.Println("用例【" + name + "】" + " PASS " + lpStr + "ms")
+				color.Green("用例【" + name + "】" + " PASS " + lpStr + "ms")
 			} else {
-				log.Println("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
+				color.Set(color.BgRed)
+				fmt.Println("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
 				noFail = false
 			}
 		} else {
-			log.Println("用例【" + name + "】" + " SKIP " + "0ms")
+			color.Yellow("用例【" + name + "】" + " SKIP " + "0ms")
 			continue
 		}
 	}
 
 	if noFail {
-		log.Println("用户故事【" + us.topic + "】" + " PASS " + strconv.FormatInt(sunLp, 10) + "ms")
+		color.Green("用户故事【" + us.topic + "】" + " PASS " + strconv.FormatInt(sunLp, 10) + "ms")
 	} else {
-		log.Println("用户故事【" + us.topic + "】" + " FAIL " + strconv.FormatInt(sunLp, 10) + "ms")
+		color.Red("用户故事【" + us.topic + "】" + " FAIL " + strconv.FormatInt(sunLp, 10) + "ms")
 	}
+
 }
