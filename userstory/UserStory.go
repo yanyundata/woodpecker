@@ -2,7 +2,6 @@ package userstory
 
 import (
 	"container/list"
-	"fmt"
 	"github.com/fatih/color"
 	"strconv"
 )
@@ -42,8 +41,7 @@ func (us UserStory) ThatSAll() {
 			if sb.pass {
 				color.Green("用例【" + name + "】" + " PASS " + lpStr + "ms")
 			} else {
-				color.Set(color.BgRed)
-				fmt.Println("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
+				color.Red("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
 				noFail = false
 			}
 		} else {

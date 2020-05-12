@@ -1,6 +1,7 @@
 package userstory
 
 import (
+	"fmt"
 	"log"
 	"time"
 )
@@ -22,6 +23,8 @@ func (sb *SandBox) run(testCase ITestCase) {
 			switch err.(type) {
 			case string:
 				sb.msg = err.(string)
+			case interface{}:
+				sb.msg = fmt.Sprintf("%v", err)
 			default:
 				log.Println(err)
 			}
