@@ -5,27 +5,13 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"net/url"
-	"os"
-	"strings"
 )
 
-var BaseUrl = ""
+func aB(method string, url string, param string) Result {
+	log.Println(method + ":" + url)
+	url = url + param
 
-func init() {
-	BaseUrl = os.Getenv("BaseUrl")
-}
-
-func aB(method string, uri string, param string) Result {
-	log.Println(method + ":" + BaseUrl + uri)
-	prefix := ""
-	if strings.Contains(param, "?") {
-		prefix = "?"
-		param = param[1:]
-	}
-	escape := url.PathEscape(param)
-	uri = uri + prefix + escape
-	req, _ := http.NewRequest(method, BaseUrl+uri, nil)
+	req, _ := http.NewRequest(method, url, nil)
 	res, _ := http.DefaultClient.Do(req)
 
 	return Result{res.Body}
@@ -35,7 +21,7 @@ func c(method string, url string, object interface{}) Result {
 	log.Println(method + ":" + url + "\n")
 	j, _ := json.Marshal(object)
 
-	req, _ := http.NewRequest(method, BaseUrl+url, bytes.NewBuffer(j))
+	req, _ := http.NewRequest(method, url, bytes.NewBuffer(j))
 	req.Header.Add("content-type", "application/json")
 	res, _ := http.DefaultClient.Do(req)
 

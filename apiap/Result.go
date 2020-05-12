@@ -5,7 +5,6 @@ import (
 	"github.com/yanyundata/woodpecker/utils"
 	"io"
 	"io/ioutil"
-	"log"
 )
 
 type Result struct {
@@ -20,17 +19,27 @@ func (result Result) ToString() string {
 	return string(bs)
 }
 
-func (result Result) ToJson() utils.JsonObject {
+func (result Result) ToMap() map[string]interface{} {
 	defer result.body.Close()
 
 	jsonMap := make(map[string]interface{})
 	bs, _ := ioutil.ReadAll(result.body)
-	err1 := json.Unmarshal(bs, &jsonMap)
-	if err1 != nil {
-		log.Println(err1)
-	}
+	json.Unmarshal(bs, &jsonMap)
 
-	jsonObject := utils.JsonObject{JsonMap: jsonMap}
+	return jsonMap
+}
+
+func (result Result) ToJson() utils.JsonObject {
+	defer result.body.Close()
+
+	jsonObject := utils.JsonObject{JsonMap: result.ToMap()}
 
 	return jsonObject
+}
+
+func (result Result) ToModel(model interface{}) {
+	defer result.body.Close()
+
+	bs, _ := ioutil.ReadAll(result.body)
+	json.Unmarshal(bs, model)
 }

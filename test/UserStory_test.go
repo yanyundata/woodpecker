@@ -7,10 +7,12 @@ import (
 	"testing"
 )
 
+var baseUrl = "https://yan-yun.com:38085/lvyuan/admin/api"
+
 func TestUserStory(t *testing.T) {
 	us := userstory.New("UserStory Demo1")
 	us.Tell("测试GetA接口", func(session userstory.Session) {
-		gadata := apiap.GetA("/admin/test", "?test=123").ToString()
+		gadata := apiap.GetA(baseUrl+"/test", "?test=123").ToString()
 		if gadata == "123ok" {
 			session["gadata"] = gadata
 		} else {
