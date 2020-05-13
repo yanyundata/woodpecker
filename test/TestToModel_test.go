@@ -37,7 +37,7 @@ type ResultOrderSettings struct {
 
 func TestToModel(t *testing.T) {
 	resultOrderSettings := ResultOrderSettings{}
-	apiap.GetA("https://yan-yun.com:38085/lvyuan/admin/api/orderSettings", "").ToModel(&resultOrderSettings)
+	apiap.GetA("https://dev.yan-yun.com:38085/lvyuan/admin/api/orderSettings", "").ToModel(&resultOrderSettings)
 
 	log.Println(resultOrderSettings.Data.DeliveryReminder)
 }

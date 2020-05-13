@@ -11,7 +11,7 @@ type DemoDto struct {
 	Test2 string `json:"test2"`
 }
 
-var apiUtilsBaseUrl = "https://yan-yun.com:38085/lvyuan/admin/api"
+var apiUtilsBaseUrl = "https://dev.yan-yun.com:38085/lvyuan/admin/api"
 
 type Model struct {
 	Code int    `json:"code"`

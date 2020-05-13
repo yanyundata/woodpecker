@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-var baseUrl = "https://yan-yun.com:38085/lvyuan/admin/api"
+var baseUrl = "https://dev.yan-yun.com:38085/lvyuan/admin/api"
 
 func TestUserStory(t *testing.T) {
 	us := userstory.New("UserStory Demo1")
