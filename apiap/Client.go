@@ -1,65 +1,90 @@
 package apiap
 
 import (
-	"bytes"
-	"encoding/json"
-	"log"
-	"net/http"
+	"github.com/go-resty/resty/v2"
 )
 
-func aB(method string, url string, param string) Result {
-	log.Println(method + ":" + url)
-	url = url + param
-
-	req, _ := http.NewRequest(method, url, nil)
-	res, _ := http.DefaultClient.Do(req)
-
-	return Result{res.Body}
-}
-
-func c(method string, url string, object interface{}) Result {
-	log.Println(method + ":" + url + "\n")
-	j, _ := json.Marshal(object)
-
-	req, _ := http.NewRequest(method, url, bytes.NewBuffer(j))
-	req.Header.Add("content-type", "application/json")
-	res, _ := http.DefaultClient.Do(req)
-
-	return Result{res.Body}
-}
-
 func GetA(url string, param string) Result {
-	return aB("GET", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		SetQueryString(param).
+		Get(url)
+
+	return Result{resp, err}
 }
 
 func GetB(url string, param string) Result {
-	return aB("GET", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		Get(url + param)
+
+	return Result{resp, err}
 }
 
 func PostA(url string, param string) Result {
-	return aB("POST", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		SetQueryString(param).
+		Post(url)
+
+	return Result{resp, err}
 }
 
 func PostC(url string, object interface{}) Result {
-	return c("POST", url, object)
+	client := resty.New()
+	resp, err := client.R().
+		SetBody(object).
+		Post(url)
+
+	return Result{resp, err}
 }
 
 func PutA(url string, param string) Result {
-	return aB("PUT", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		SetQueryString(param).
+		Put(url)
+
+	return Result{resp, err}
 }
 
 func PutB(url string, param string) Result {
-	return aB("PUT", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		Put(url + param)
+
+	return Result{resp, err}
 }
 
 func PutC(url string, object interface{}) Result {
-	return c("PUT", url, object)
+	client := resty.New()
+	resp, err := client.R().
+		SetBody(object).
+		Put(url)
+
+	return Result{resp, err}
 }
 
 func DeleteA(url string, param string) Result {
-	return aB("DELETE", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		SetQueryString(param).
+		Delete(url)
+
+	return Result{resp, err}
 }
 
 func DeleteB(url string, param string) Result {
-	return aB("DELETE", url, param)
+	client := resty.New()
+	resp, err := client.R().
+		EnableTrace().
+		Delete(url + param)
+
+	return Result{resp, err}
 }

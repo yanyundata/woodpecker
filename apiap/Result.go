@@ -2,44 +2,32 @@ package apiap
 
 import (
 	"encoding/json"
+	"github.com/go-resty/resty/v2"
 	"github.com/yanyundata/woodpecker/utils"
-	"io"
-	"io/ioutil"
 )
 
 type Result struct {
-	body io.ReadCloser
+	response *resty.Response
+	err      error
 }
 
 func (result Result) ToString() string {
-	defer result.body.Close()
-
-	bs, _ := ioutil.ReadAll(result.body)
-
-	return string(bs)
+	return string(result.response.Body())
 }
 
 func (result Result) ToMap() map[string]interface{} {
-	defer result.body.Close()
-
 	jsonMap := make(map[string]interface{})
-	bs, _ := ioutil.ReadAll(result.body)
-	json.Unmarshal(bs, &jsonMap)
+	json.Unmarshal((*(&result.response)).Body(), &jsonMap)
 
 	return jsonMap
 }
 
 func (result Result) ToJson() utils.JsonObject {
-	defer result.body.Close()
-
 	jsonObject := utils.JsonObject{JsonMap: result.ToMap()}
 
 	return jsonObject
 }
 
 func (result Result) ToModel(model interface{}) {
-	defer result.body.Close()
-
-	bs, _ := ioutil.ReadAll(result.body)
-	json.Unmarshal(bs, model)
+	json.Unmarshal((*(&result.response)).Body(), model)
 }
