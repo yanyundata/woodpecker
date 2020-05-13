@@ -31,7 +31,7 @@ func TestUserStory(t *testing.T) {
 func TestUserStoryCase(t *testing.T) {
 	us := userstory.New("用户查询测试")
 	us.Tell("测试具体查询", func(session userstory.Session) {
-		gadata := apiap.GetA("https://yan-yun.com:38085/gotest/get/two/san/12", "").ToJson()
+		gadata := apiap.GetA("http://localhost:8080/gotest/get/one", "?name=张三&age=12").ToMap()
 		log.Println("====================")
 		log.Println(gadata)
 		log.Println("====================")

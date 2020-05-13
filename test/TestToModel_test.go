@@ -39,5 +39,5 @@ func TestToModel(t *testing.T) {
 	resultOrderSettings := ResultOrderSettings{}
 	apiap.GetA("https://yan-yun.com:38085/lvyuan/admin/api/orderSettings", "").ToModel(&resultOrderSettings)
 
-	log.Println(resultOrderSettings.Data.AfterSalesPeriod)
+	log.Println(resultOrderSettings.Data.DeliveryReminder)
 }
