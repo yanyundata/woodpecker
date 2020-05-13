@@ -12,7 +12,7 @@ var baseUrl = "https://yan-yun.com:38085/lvyuan/admin/api"
 func TestUserStory(t *testing.T) {
 	us := userstory.New("UserStory Demo1")
 	us.Tell("测试GetA接口", func(session userstory.Session) {
-		gadata := apiap.GetA(baseUrl+"/test", "?test=123").ToString()
+		gadata := apiap.GetA(baseUrl+"/test", "test=123").ToString()
 		if gadata == "123ok" {
 			session["gadata"] = gadata
 		} else {
@@ -31,7 +31,7 @@ func TestUserStory(t *testing.T) {
 func TestUserStoryCase(t *testing.T) {
 	us := userstory.New("用户查询测试")
 	us.Tell("测试具体查询", func(session userstory.Session) {
-		gadata := apiap.GetA("http://localhost:8080/gotest/get/one", "?name=张三&age=12").ToMap()
+		gadata := apiap.GetA("http://localhost:8080/gotest/get/one", "name=张三&age=12").ToMap()
 		log.Println("====================")
 		log.Println(gadata)
 		log.Println("====================")
