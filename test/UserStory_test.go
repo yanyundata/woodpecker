@@ -1,28 +1,24 @@
 package test
 
 import (
-	"context"
-	pb "gitlab.com/yanyundata/module/go/proto-cicd-demo"
-	"google.golang.org/grpc"
-	"log"
 	"testing"
 )
 
 func TestUserStory(t *testing.T) {
-	conn, err := grpc.Dial("121.22.244.194:38099", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("Connect failed: %v", err)
-	}
-
-	c := pb.NewMyServiceClient(conn)
-
-	hr := &pb.HelloRequest{Name: "tomwu"}
-	r, err := c.SayHi(context.Background(), hr)
-
-	if err != nil {
-		log.Fatalf("Fail to call SayHi：%v", err)
-	}
-	log.Printf("Result：%s ", r.Message)
+	//conn, err := grpc.Dial("121.22.244.194:38099", grpc.WithInsecure())
+	//if err != nil {
+	//	log.Fatalf("Connect failed: %v", err)
+	//}
+	//
+	//c := pb.NewMyServiceClient(conn)
+	//
+	//hr := &pb.HelloRequest{Name: "tomwu"}
+	//r, err := c.SayHi(context.Background(), hr)
+	//
+	//if err != nil {
+	//	log.Fatalf("Fail to call SayHi：%v", err)
+	//}
+	//log.Printf("Result：%s ", r.Message)
 
 	//us := userstory.New("UserStory Demo1")
 	//us.Tell("测试GetA接口", func(session userstory.Session) {
