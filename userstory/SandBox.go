@@ -8,7 +8,7 @@ import (
 
 type SandBox struct {
 	testCaseName string
-	session      Session
+	busyBox      BusyBox
 
 	pass     bool
 	timeCost int64
@@ -35,5 +35,5 @@ func (sb *SandBox) run(testCase ITestCase) {
 		}
 	}()
 
-	testCase.Test(sb.session)
+	testCase.Test(sb.busyBox)
 }

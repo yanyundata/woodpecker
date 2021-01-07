@@ -10,14 +10,14 @@ type UserStory struct {
 	topic         string
 	testCaseMap   map[string]ITestCase
 	testCaseIndex *list.List
-	session       Session
+	busyBox       BusyBox
 }
 
 func New(topic string) UserStory {
-	return UserStory{topic, make(map[string]ITestCase), list.New(), make(Session)}
+	return UserStory{topic, make(map[string]ITestCase), list.New(), newBusyBox()}
 }
 
-func (us UserStory) Tell(name string, testCaseFun func(session Session)) UserStory {
+func (us UserStory) Tell(name string, testCaseFun func(busybox BusyBox)) UserStory {
 	us.testCaseMap[name] = TestCase(testCaseFun)
 	us.testCaseIndex.PushBack(name)
 	return us
@@ -32,7 +32,7 @@ func (us UserStory) ThatSAll() {
 	var sunLp = int64(0)
 	for e := us.testCaseIndex.Front(); e != nil; e = e.Next() {
 		name := e.Value.(string)
-		sb := SandBox{testCaseName: name, session: us.session}
+		sb := SandBox{testCaseName: name, busyBox: us.busyBox}
 		if noFail {
 			sb.run(us.testCaseMap[name])
 			lpStr := strconv.FormatInt(sb.timeCost, 10)
