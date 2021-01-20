@@ -12,7 +12,7 @@ type Group struct {
 
 func (g Group) getExecutorData(executorDataList *list.List) {
 	for i := 0; i < len(g.subGroupList); i++ {
-		g.getExecutorData(executorDataList)
+		g.subGroupList[i].getExecutorData(executorDataList)
 	}
 
 	for i := 0; i < len(g.userStoryList); i++ {

@@ -1,25 +1,37 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"github.com/yanyundata/woodpecker/userstory"
-	pb "gitlab.com/yanyundata/module/go/proto-cicd-demo"
-	"log"
 )
 
-func Hello(ch chan int) {
-	fmt.Println("hello everybody , I'm asong")
-	ch <- 1
-}
-
 func main() {
-	us := userstory.New("Grpc Test Demo")
-	us.Tell("请求Grpc", func(busybox userstory.BusyBox) {
-		c := pb.NewMyServiceClient(busybox.GrpcHelper().Conn("121.22.244.194:38099"))
-		r, _ := c.SayHi(context.Background(), &pb.HelloRequest{Name: "tomwu"})
-		busybox.Session()["result"] = r.Message
-	}).Tell("打印结果", func(busybox userstory.BusyBox) {
-		log.Printf("Result：%s ", busybox.Session()["result"])
-	}).ThatSAll()
+	rootGroup := userstory.NewGroup("快车道APP测试")
+
+	ddzc := userstory.NewGroup("注册登陆")
+
+	rootGroup.AddSubGroup(ddzc)
+	shoujihaozhuce := userstory.NewGroup("手机号注册登陆")
+	weixindenglu := userstory.NewGroup("微信登陆")
+	wangjimima := userstory.NewGroup("忘记密码")
+	ddzc.AddSubGroup(shoujihaozhuce).AddSubGroup(weixindenglu).AddSubGroup(wangjimima)
+
+	grzx := userstory.NewGroup("个人中心")
+	sy := userstory.NewGroup("首页")
+	tj := userstory.NewGroup("体检")
+	dt := userstory.NewGroup("地图")
+	jcyu := userstory.NewGroup("检车预约")
+
+	rootGroup.AddSubGroup(ddzc).AddSubGroup(grzx).AddSubGroup(sy).AddSubGroup(tj).AddSubGroup(dt).AddSubGroup(jcyu)
+
+	us := userstory.New("首页").Tell("显示视频", func(busybox userstory.BusyBox) {
+
+	}).Tell("显示新闻", func(busybox userstory.BusyBox) {
+
+	}).Tell("显示。。。", func(busybox userstory.BusyBox) {
+
+	})
+	shoujihaozhuce.AddUserStory(&us)
+
+	te := userstory.TestExecutor{}
+	te.Test(rootGroup)
 }
