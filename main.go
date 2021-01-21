@@ -9,7 +9,6 @@ func main() {
 
 	ddzc := userstory.NewGroup("注册登陆")
 
-	rootGroup.AddSubGroup(ddzc)
 	shoujihaozhuce := userstory.NewGroup("手机号注册登陆")
 	weixindenglu := userstory.NewGroup("微信登陆")
 	wangjimima := userstory.NewGroup("忘记密码")
