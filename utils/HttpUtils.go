@@ -4,8 +4,12 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-func GetUrl(url string) Result {
+func GetUrl(url string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		Get(url)
@@ -13,8 +17,12 @@ func GetUrl(url string) Result {
 	return Result{resp, err}
 }
 
-func GetParam(url string, param string) Result {
+func GetParam(url string, param string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		SetQueryString(param).
@@ -23,8 +31,12 @@ func GetParam(url string, param string) Result {
 	return Result{resp, err}
 }
 
-func PostParam(url string, param string) Result {
+func PostParam(url string, param string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		SetQueryString(param).
@@ -33,8 +45,12 @@ func PostParam(url string, param string) Result {
 	return Result{resp, err}
 }
 
-func PostJson(url string, object interface{}) Result {
+func PostJson(url string, object interface{}, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		SetBody(object).
 		Post(url)
@@ -42,8 +58,12 @@ func PostJson(url string, object interface{}) Result {
 	return Result{resp, err}
 }
 
-func PutParam(url string, param string) Result {
+func PutParam(url string, param string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		SetQueryString(param).
@@ -52,26 +72,38 @@ func PutParam(url string, param string) Result {
 	return Result{resp, err}
 }
 
-func PutUrl(url string) Result {
+func PutUrl(url string, headers map[string]string) Result {
 	client := resty.New()
 	resp, err := client.R().
 		EnableTrace().
 		Put(url)
 
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	return Result{resp, err}
 }
 
-func PutJson(url string, object interface{}) Result {
+func PutJson(url string, object interface{}, headers map[string]string) Result {
 	client := resty.New()
 	resp, err := client.R().
 		SetBody(object).
 		Put(url)
 
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	return Result{resp, err}
 }
 
-func DeleteParam(url string, param string) Result {
+func DeleteParam(url string, param string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		SetQueryString(param).
@@ -80,8 +112,12 @@ func DeleteParam(url string, param string) Result {
 	return Result{resp, err}
 }
 
-func DeleteUrl(url string) Result {
+func DeleteUrl(url string, headers map[string]string) Result {
 	client := resty.New()
+	if headers != nil {
+		client.SetHeaders(headers)
+	}
+
 	resp, err := client.R().
 		EnableTrace().
 		Delete(url)
