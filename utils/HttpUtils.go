@@ -74,26 +74,26 @@ func PutParam(url string, param string, headers map[string]string) Result {
 
 func PutUrl(url string, headers map[string]string) Result {
 	client := resty.New()
-	resp, err := client.R().
-		EnableTrace().
-		Put(url)
-
 	if headers != nil {
 		client.SetHeaders(headers)
 	}
+
+	resp, err := client.R().
+		EnableTrace().
+		Put(url)
 
 	return Result{resp, err}
 }
 
 func PutJson(url string, object interface{}, headers map[string]string) Result {
 	client := resty.New()
-	resp, err := client.R().
-		SetBody(object).
-		Put(url)
-
 	if headers != nil {
 		client.SetHeaders(headers)
 	}
+
+	resp, err := client.R().
+		SetBody(object).
+		Put(url)
 
 	return Result{resp, err}
 }
