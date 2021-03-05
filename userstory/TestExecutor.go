@@ -3,6 +3,8 @@ package userstory
 import (
 	"container/list"
 	"fmt"
+	"github.com/fatih/color"
+	"strconv"
 )
 
 type ExecutorData struct {
@@ -29,6 +31,44 @@ func (ta TestExecutor) Test(us ITestAble) Report {
 	l := list.New()
 	us.getExecutorData(l)
 
-	fmt.Println(l.Len())
+	busyBox := newBusyBox()
+
+	for e := l.Front(); e != nil; e = e.Next() {
+		tc := e.Value.(ExecutorData)
+
+		fmt.Println(tc.name)
+	}
+
+	var noFail = true
+	var sunLp = int64(0)
+	for e := l.Front(); e != nil; e = e.Next() {
+		ed := e.Value.(ExecutorData)
+		name := ed.name
+
+		sb := SandBox{testCaseName: name, busyBox: busyBox}
+
+		if noFail {
+			sb.run(ed.testCase)
+			lpStr := strconv.FormatInt(sb.timeCost, 10)
+			sunLp = sunLp + sb.timeCost
+
+			if sb.pass {
+				color.Green("用例【" + name + "】" + " PASS " + lpStr + "ms")
+			} else {
+				color.Red("用例【" + name + "】" + " FAIL " + sb.msg + lpStr + "ms")
+				noFail = false
+			}
+		} else {
+			color.Yellow("用例【" + name + "】" + " SKIP " + "0ms")
+			continue
+		}
+	}
+
+	//if noFail {
+	//	color.Green("用户故事【" + us + "】" + " PASS " + strconv.FormatInt(sunLp, 10) + "ms")
+	//} else {
+	//	color.Red("用户故事【" + us.topic + "】" + " FAIL " + strconv.FormatInt(sunLp, 10) + "ms")
+	//}
+
 	return Report{}
 }
